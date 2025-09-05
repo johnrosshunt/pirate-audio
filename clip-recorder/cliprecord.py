@@ -8,7 +8,7 @@ from PIL import Image, ImageTk, ImageDraw, ImageFont
 
 from fonts.ttf import RobotoMedium
 import RPi.GPIO as GPIO
-from ST7789 import ST7789
+from st7789 import ST7789
 import sounddevice
 import wave
 

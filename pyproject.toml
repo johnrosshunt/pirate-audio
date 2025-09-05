@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Pirate Audio"
+version = "0.1.0"
+description = "Pirate Audio dependencies"
+authors = [{ name = "John Ross Hunt", email = "johnrosshunt@gmail.com" }]
+dependencies = [
+    "fonts",
+    "font-roboto",
+    "ST7789",
+    "sounddevice",
+    "uv",
+    "ruff"
+]

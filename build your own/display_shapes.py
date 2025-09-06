@@ -5,7 +5,7 @@ from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
 
-import ST7789
+import st7789
 
 print("""
 shapes.py - Display test shapes on the LCD using PIL.
@@ -28,14 +28,14 @@ try:
 except IndexError:
     display_type = "square"
 
-# Create ST7789 LCD display class.
+# Create st7789 LCD display class.
 
 if display_type in ("square", "rect", "round"):
-    disp = ST7789.ST7789(
+    disp = st7789.ST7789(
         height=135 if display_type == "rect" else 240,
         rotation=0 if display_type == "rect" else 90,
         port=0,
-        cs=ST7789.BG_SPI_CS_FRONT,  # BG_SPI_CS_BACK or BG_SPI_CS_FRONT
+        cs=st7789.BG_SPI_CS_FRONT,  # BG_SPI_CS_BACK or BG_SPI_CS_FRONT
         dc=9,
         backlight=19,               # 18 for back BG slot, 19 for front BG slot.
         spi_speed_hz=80 * 1000 * 1000,
@@ -44,7 +44,7 @@ if display_type in ("square", "rect", "round"):
     )
 
 elif display_type == "dhmini":
-    disp = ST7789.ST7789(
+    disp = st7789.ST7789(
         height=240,
         width=320,
         rotation=180,
@@ -102,7 +102,8 @@ font = ImageFont.load_default()
 def draw_rotated_text(image, text, position, angle, font, fill=(255, 255, 255)):
     # Get rendered font width and height.
     draw = ImageDraw.Draw(image)
-    width, height = draw.textsize(text, font=font)
+    left, _, right, bottom = font.getbbox(text)
+    width, height = right - left, bottom
     # Create a new image with transparent background to store the text.
     textimage = Image.new('RGBA', (width, height), (0, 0, 0, 0))
     # Render the text.

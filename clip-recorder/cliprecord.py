@@ -208,8 +208,8 @@ class Recordamajig:
             raise sounddevice.CallbackStop
 
     def draw_text(self, x, y, text, font, w=480, h=None, alignment="left", vertical_alignment="top", color=COLOR_WHITE):
-        tw = self._draw.textlength(text, font=font)
-        th = font.getsize(text)[1]
+        left, _, right, bottom = font.getbbox(text)
+        tw, th = right - left, bottom
         if h is None:
             h = th
         if alignment == "center":
